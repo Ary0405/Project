@@ -17,21 +17,6 @@ class SwappableScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String emoji(String category) {
-      switch (category) {
-        case 'Electronics':
-          return '📱';
-        case 'Stationary':
-          return '📚';
-        case 'Clothing':
-          return '👕';
-        case 'Sports':
-          return '⚽';
-        // Add more cases for other categories if needed
-        default:
-          return '';
-      }
-    }
 
     final user = Provider.of<Auth>(context);
     final authUser = FirebaseAuth.instance.currentUser!;
@@ -179,7 +164,7 @@ class SwappableScreen extends StatelessWidget {
                         textAlign: TextAlign.left,
                         style: const TextStyle(
                           fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w700,
                           color: Colors.black54,
                         ),
                       ),
