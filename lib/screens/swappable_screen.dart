@@ -44,7 +44,7 @@ class SwappableScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.orange),
+        iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
@@ -109,9 +109,29 @@ class SwappableScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.5,
               child: Column(
                 children: [
+                  Row(
+                    //avatar
+                    children: [
+
+                      //ownername
+                      Text(
+                        (swappable.ownerId == authUser.email)  //you box
+                            ? "You"
+                            : swappable.ownerName,
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+
+                      const Spacer(),                    
+                    ],
+                  ),
+
                   SizedBox(
                     width: double.infinity,
-                    child: Text(
+                    child: Text(              //mitumitu box
                       swappable.name,
                       textAlign: TextAlign.left,
                       style: const TextStyle(
@@ -124,59 +144,33 @@ class SwappableScreen extends StatelessWidget {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.01,
                   ),
-                  Row(
-                    //avatar
-                    children: [
+                  
 
-                      const SizedBox(width: 10),
-                      //ownername
-                      Text(
-                        (swappable.ownerId == authUser.email)
-                            ? "You"
-                            : swappable.ownerName,
-                        textAlign: TextAlign.left,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-
-                      const Spacer(),
-
-                      //category pill
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 14,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.black12,
-                        ),
-                        alignment: Alignment.center,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              emoji(swappable.category),
-                              style: const TextStyle(fontSize: 18),
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              swappable.category,
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.02,
                   ),
 
+
+
+
+                   SizedBox(
+                    width: double.infinity,
+                    child: Text(              //mitumitu box
+                      'Description',
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(
+                        fontSize: 14.8,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black
+                      ),
+                    ),
+                  ),
+
+
+
                   //description
                   SizedBox(
+
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height * 0.15,
                     child: SingleChildScrollView(
@@ -192,7 +186,7 @@ class SwappableScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.01,
+                    height: MediaQuery.of(context).size.height * 0.1,
                   ),
                   const Spacer(),
                   //condition
@@ -203,14 +197,18 @@ class SwappableScreen extends StatelessWidget {
                       const Text(
                         'Condition: ',
                         style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black54,
+                          fontSize: 14.8,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black,
+                          
                         ),
+                        
                       ),
+                      
                       ConditionStars(swappable.condition)
                     ],
                   ),
+                  
                   //buttons
                   Container(
                       child: (swappable.ownerId != authUser.email)
@@ -303,16 +301,16 @@ class SwappableScreen extends StatelessWidget {
                       //swap button
                       ),
                   const SizedBox(
-                    height: 20,
+                    height: 11,
                   ),
                   SizedBox(
                     width: double.infinity,
                     child: Text(
                       'Last updated at ' + formattedDate,
                       style: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.w400,
-                        color: Colors.orange,
+                        color: Colors.black54,
                       ),
                     ),
                   ),
