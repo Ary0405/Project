@@ -93,11 +93,12 @@ class SwappableScreen extends StatelessWidget {
               margin: const EdgeInsets.all(20),
               height: MediaQuery.of(context).size.height * 0.5,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     //avatar
                     children: [
-
                       //ownername
                       Text(
                         (swappable.ownerId == authUser.email)  //you box
@@ -108,14 +109,14 @@ class SwappableScreen extends StatelessWidget {
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
-                      ),
-
-                      const Spacer(),                    
+                      ),                   
                     ],
                   ),
-
                   SizedBox(
-                    width: double.infinity,
+                    height: 5,
+                  ),
+                  SizedBox(
+                    // width: double.infinity,
                     child: Text(              //mitumitu box
                       swappable.name,
                       textAlign: TextAlign.left,
@@ -125,18 +126,6 @@ class SwappableScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.01,
-                  ),
-                  
-
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
-
-
-
 
                    SizedBox(
                     width: double.infinity,
@@ -169,9 +158,6 @@ class SwappableScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.1,
                   ),
                   const Spacer(),
                   //condition
@@ -220,9 +206,9 @@ class SwappableScreen extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(30),
                                         border: Border.all(
-                                          color: Colors.orange,
+                                          color: Colors.black,
                                         ),
-                                        color: Colors.orange,
+                                        color: Colors.black,
                                       ),
                                       child: InkWell(
                                         splashColor: const Color.fromRGBO(
@@ -319,10 +305,10 @@ Widget buildSwappableButton({
     child: Ink(
       width: MediaQuery.of(context).size.width * 0.4,
       decoration: BoxDecoration(
-        color: wishlist ? Colors.orange : const Color(0xFFF9F6F2),
+        color: wishlist ? Colors.black : const Color(0xFFF9F6F2),
         borderRadius: BorderRadius.circular(30),
         border: Border.all(
-          color: wishlist ? Colors.transparent : Colors.orange,
+          color: wishlist ? Colors.transparent : Colors.black,
           width: 2,
         ),
       ),
@@ -341,7 +327,7 @@ Widget buildSwappableButton({
             children: [
               Icon(
                 wishlist ? Icons.favorite : Icons.favorite_border,
-                color: wishlist ? Colors.white : Colors.red,
+                color: wishlist ? Colors.white : Colors.black,
               ),
               Expanded(
                 child: Row(
@@ -351,9 +337,9 @@ Widget buildSwappableButton({
                       wishlist ? 'Saved' : 'Add to Wishlist',
                       overflow: TextOverflow.fade,
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 15,
                         fontWeight: FontWeight.w600,
-                        color: wishlist ? Colors.white : Colors.orange,
+                        color: wishlist ? Colors.white : Colors.black,
                       ),
                     ),
                   ],
