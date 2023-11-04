@@ -51,6 +51,8 @@ class SwappableScreen extends StatelessWidget {
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Hero(
               tag: 'swappable-${swappable.id}',
@@ -58,7 +60,7 @@ class SwappableScreen extends StatelessWidget {
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.4,
                 initialPage: 0,
-                indicatorColor: Colors.orange,
+                indicatorColor: const Color.fromARGB(255, 55, 51, 46),
                 isLoop: swappable.imageUrls.length > 1,
                 autoPlayInterval: 4000,
                 children: swappable.imageUrls
@@ -125,10 +127,6 @@ class SwappableScreen extends StatelessWidget {
                   Row(
                     //avatar
                     children: [
-                      CircleAvatar(
-                        radius: 18,
-                        backgroundImage: NetworkImage(swappable.ownerImageUrl),
-                      ),
 
                       const SizedBox(width: 10),
                       //ownername
@@ -198,12 +196,14 @@ class SwappableScreen extends StatelessWidget {
                   ),
                   const Spacer(),
                   //condition
-                  Row(
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
                         'Condition: ',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 22,
                           fontWeight: FontWeight.w500,
                           color: Colors.black54,
                         ),
@@ -358,14 +358,14 @@ Widget buildSwappableButton({
             children: [
               Icon(
                 wishlist ? Icons.favorite : Icons.favorite_border,
-                color: wishlist ? Colors.white : Colors.orange,
+                color: wishlist ? Colors.white : Colors.red,
               ),
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      wishlist ? 'Saved' : 'Wishlist',
+                      wishlist ? 'Saved' : 'Add to Wishlist',
                       overflow: TextOverflow.fade,
                       style: TextStyle(
                         fontSize: 18,
