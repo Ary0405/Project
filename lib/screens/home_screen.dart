@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final _screens = [
     const ExploreScreen(),
     const SwapScreen(),
-    ProfileScreen(name: 'User Name', email: 'user@email.com', imageUrl: 'http://example.com/image.jpg'),
+    ProfileScreen(),
     const ListingScreen(),
   ];
   @override

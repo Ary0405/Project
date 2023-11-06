@@ -1,8 +1,12 @@
 {
     "java.configuration.updateBuildConfiguration": "interactive",
 <<<<<<< HEAD
+    "cmake.configureOnOpen": true
+=======
+<<<<<<< HEAD
     "cmake.configureOnOpen": false
 =======
     "cmake.sourceDirectory": "D:/VS Code/Flutter/Project/windows/flutter"
 >>>>>>> 5e003f2352e1be32f013c6f08e61fbc4dfa86961
+>>>>>>> main
 }

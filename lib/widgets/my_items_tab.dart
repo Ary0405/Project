@@ -23,8 +23,9 @@ class MyItems extends StatelessWidget {
     final swappableProvider = Provider.of<SwappableProvider>(context);
     final swappables = swappableProvider.swappables;
     final isFetching = swappableProvider.isFetching;
-    final filteredSwappables =
-        swappables.where((swappable) => swappable.ownerId == authUser.email).toList();
+    final filteredSwappables = swappables
+        .where((swappable) => swappable.ownerId == authUser.email)
+        .toList();
     return Consumer<BottomBarVisibilityProvider>(
         builder: (context, bottomBarVisibilityProvider, child) {
       scrollController.addListener(() {
@@ -68,13 +69,15 @@ class MyItems extends StatelessWidget {
                   right: 25,
                   child: CircleAvatar(
                     radius: 30,
-                    backgroundColor: Colors.orange,
+                    backgroundColor: Colors.black,
                     child: IconButton(
                       onPressed: () {
                         Navigator.of(context)
                             .pushNamed(AddItemScreen.routeName);
                       },
-                      icon: const Icon(Icons.add),
+                      icon: const Icon(
+                        Icons.add,
+                      ),
                       color: Colors.white,
                     ),
                   ),
