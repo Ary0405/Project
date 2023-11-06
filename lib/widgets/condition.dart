@@ -14,7 +14,7 @@ class ConditionStars extends StatelessWidget {
         for (var i = 0; i < (rating - 0.5); i++, starCounter++)
           const Icon(
             Icons.star_sharp,
-            size: 26,
+            size: 16,
             color: Colors.black,
           ),
         //print half star
@@ -38,14 +38,14 @@ class ConditionStars extends StatelessWidget {
                 height: 26,
                 child: Icon(
                   Icons.star_sharp,
-                  size: 24,
+                  size: 16,
                   color: Colors.grey[300],
                 ),
               ),
             ),
         //print blank star
         for (var i = 0; i < 5 && starCounter < 5; i++, starCounter++)
-          const Icon(Icons.star_sharp, size: 26, color: Colors.grey),
+          const Icon(Icons.star_sharp, size: 16, color: Colors.grey),
       ],
     );
   }
