@@ -29,10 +29,10 @@ class SearchBox extends StatelessWidget {
               },
               decoration: InputDecoration(
                 border: InputBorder.none,
-                hintText: 'What are you looking for?',
+                hintText: 'Search',
                 hintStyle: TextStyle(
                   fontSize: 18,
-                  color: Colors.black,
+                  color: Color.fromARGB(255, 89, 89, 89),
                   fontWeight: FontWeight.w400,
                 ),
               ),

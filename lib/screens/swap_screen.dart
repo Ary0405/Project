@@ -62,6 +62,12 @@ class _SwapScreenState extends State<SwapScreen> with TickerProviderStateMixin {
             handleSearch: _onSearchQueryChanged,
           ),
           Container(
+            height: MediaQuery.of(context).size.height * 0.09,
+            padding: EdgeInsets.all(
+              10,
+            ),
+            // width: 100,
+            child: Container(
             decoration: BoxDecoration(
               color: Color(0xFFF4F6FB),
               borderRadius: BorderRadius.only(
@@ -88,6 +94,8 @@ class _SwapScreenState extends State<SwapScreen> with TickerProviderStateMixin {
                   .toList(),
               controller: _tabController,
             ),
+          ),
+
           ),
           const SizedBox(height: 10),
           Expanded(
@@ -136,8 +144,8 @@ Widget _buildTab({
       child: Text(
         text,
         style: const TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w700,
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
         ),
       ),
     ),
