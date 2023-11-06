@@ -23,7 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final _screens = [
     const ExploreScreen(),
     const SwapScreen(),
-    ProfileScreen(),
     const ListingScreen(),
   ];
   @override
@@ -70,11 +69,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 DotNavigationBarItem(
                   icon: const Icon(Swapcons.swap),
-                  selectedColor: Colors.white,
-                  unselectedColor: Colors.grey
-                ),
-                DotNavigationBarItem(
-                  icon: const Icon(Icons.account_circle_outlined),
                   selectedColor: Colors.white,
                   unselectedColor: Colors.grey
                 ),

@@ -119,13 +119,14 @@ class _sentswapslistState extends State<sentswapslist> {
                         ),
                         Container(
                           margin: EdgeInsets.fromLTRB(
-                              MediaQuery.of(context).size.width * .41,
-                              MediaQuery.of(context).size.height * .24,
-                              0,
-                              0),
+                            MediaQuery.of(context).size.width * .37,
+                            MediaQuery.of(context).size.height * .12,
+                            0,
+                            0,
+                          ),
                           child: Image.asset(
-                            'assets/img/swap_arrow.png',
-                            height: 35,
+                            'assets/img/swap_arrow_new.png',
+                            height: 80,
                           ),
                         )
                       ],
