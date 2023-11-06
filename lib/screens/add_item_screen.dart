@@ -509,7 +509,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        'Condition*',
+                        'Condition',
                         style: TextStyle(
                           fontSize: 17,
                           fontFamily: 'Inter',
@@ -533,7 +533,7 @@ class _AddItemScreenState extends State<AddItemScreen> {
                               const EdgeInsets.symmetric(horizontal: 2),
                           itemBuilder: (context, _) => const Icon(
                             Icons.star,
-                            color: Colors.amber,
+                            color: Colors.black,
                           ),
                           onRatingUpdate: (rating) {
                             setState(() {

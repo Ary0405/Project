@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final _screens = [
     const ExploreScreen(),
     const SwapScreen(),
-    const ProfileScreen(),
+    ProfileScreen(),
     const ListingScreen(),
   ];
   @override

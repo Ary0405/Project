@@ -125,7 +125,7 @@ class _SwapDialog extends State<SwapDialog> {
                       return Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(24),
-                            color: const Color.fromRGBO(255, 142, 60, 0.7),
+                            color: Colors.black,
                           ),
                           child: IconButton(
                             icon: Icon(Icons.add),

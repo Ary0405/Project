@@ -34,8 +34,8 @@ class ConditionStars extends StatelessWidget {
                 ).createShader(rect);
               },
               child: SizedBox(
-                width: 16,
-                height: 16,
+                width: 26,
+                height: 26,
                 child: Icon(
                   Icons.star_sharp,
                   size: 16,

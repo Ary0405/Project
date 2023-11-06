@@ -17,21 +17,6 @@ class SwappableScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String emoji(String category) {
-      switch (category) {
-        case 'Electronics':
-          return '📱';
-        case 'Stationary':
-          return '📚';
-        case 'Clothing':
-          return '👕';
-        case 'Sports':
-          return '⚽';
-        // Add more cases for other categories if needed
-        default:
-          return '';
-      }
-    }
 
     final user = Provider.of<Auth>(context);
     final authUser = FirebaseAuth.instance.currentUser!;
@@ -44,13 +29,15 @@ class SwappableScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.orange),
+        iconTheme: const IconThemeData(color: Colors.black),
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Hero(
               tag: 'swappable-${swappable.id}',
@@ -58,7 +45,7 @@ class SwappableScreen extends StatelessWidget {
                 width: double.infinity,
                 height: MediaQuery.of(context).size.height * 0.4,
                 initialPage: 0,
-                indicatorColor: Colors.orange,
+                indicatorColor: const Color.fromARGB(255, 55, 51, 46),
                 isLoop: swappable.imageUrls.length > 1,
                 autoPlayInterval: 4000,
                 children: swappable.imageUrls
@@ -106,10 +93,31 @@ class SwappableScreen extends StatelessWidget {
               margin: const EdgeInsets.all(20),
               height: MediaQuery.of(context).size.height * 0.5,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Row(
+                    //avatar
+                    children: [
+                      //ownername
+                      Text(
+                        (swappable.ownerId == authUser.email)  //you box
+                            ? "You"
+                            : swappable.ownerName,
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),                   
+                    ],
+                  ),
                   SizedBox(
-                    width: double.infinity,
-                    child: Text(
+                    height: 5,
+                  ),
+                  SizedBox(
+                    // width: double.infinity,
+                    child: Text(              //mitumitu box
                       swappable.name,
                       textAlign: TextAlign.left,
                       style: const TextStyle(
@@ -119,66 +127,24 @@ class SwappableScreen extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.01,
-                  ),
-                  Row(
-                    //avatar
-                    children: [
-                      CircleAvatar(
-                        radius: 18,
-                        backgroundImage: NetworkImage(swappable.ownerImageUrl),
+                   SizedBox(
+                    width: double.infinity,
+                    child: Text(              //mitumitu box
+                      'Description',
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(
+                        fontSize: 14.8,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black
                       ),
-
-                      const SizedBox(width: 10),
-                      //ownername
-                      Text(
-                        (swappable.ownerId == authUser.email)
-                            ? "You"
-                            : swappable.ownerName,
-                        textAlign: TextAlign.left,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-
-                      const Spacer(),
-
-                      //category pill
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 14,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.black12,
-                        ),
-                        alignment: Alignment.center,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              emoji(swappable.category),
-                              style: const TextStyle(fontSize: 18),
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              swappable.category,
-                              style: const TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
+                    ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
+
+
 
                   //description
                   SizedBox(
+
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height * 0.15,
                     child: SingleChildScrollView(
@@ -187,30 +153,33 @@ class SwappableScreen extends StatelessWidget {
                         textAlign: TextAlign.left,
                         style: const TextStyle(
                           fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w700,
                           color: Colors.black54,
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.01,
-                  ),
                   const Spacer(),
                   //condition
-                  Row(
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
                         'Condition: ',
                         style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black54,
+                          fontSize: 14.8,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black,
+                          
                         ),
+                        
                       ),
+                      
                       ConditionStars(swappable.condition)
                     ],
                   ),
+                  
                   //buttons
                   Container(
                       child: (swappable.ownerId != authUser.email)
@@ -237,9 +206,9 @@ class SwappableScreen extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(30),
                                         border: Border.all(
-                                          color: Colors.orange,
+                                          color: Colors.black,
                                         ),
-                                        color: Colors.orange,
+                                        color: Colors.black,
                                       ),
                                       child: InkWell(
                                         splashColor: const Color.fromRGBO(
@@ -303,16 +272,16 @@ class SwappableScreen extends StatelessWidget {
                       //swap button
                       ),
                   const SizedBox(
-                    height: 20,
+                    height: 11,
                   ),
                   SizedBox(
                     width: double.infinity,
                     child: Text(
                       'Last updated at ' + formattedDate,
                       style: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.w400,
-                        color: Colors.orange,
+                        color: Colors.black54,
                       ),
                     ),
                   ),
@@ -336,10 +305,10 @@ Widget buildSwappableButton({
     child: Ink(
       width: MediaQuery.of(context).size.width * 0.4,
       decoration: BoxDecoration(
-        color: wishlist ? Colors.orange : const Color(0xFFF9F6F2),
+        color: wishlist ? Colors.black : const Color(0xFFF9F6F2),
         borderRadius: BorderRadius.circular(30),
         border: Border.all(
-          color: wishlist ? Colors.transparent : Colors.orange,
+          color: wishlist ? Colors.transparent : Colors.black,
           width: 2,
         ),
       ),
@@ -358,19 +327,19 @@ Widget buildSwappableButton({
             children: [
               Icon(
                 wishlist ? Icons.favorite : Icons.favorite_border,
-                color: wishlist ? Colors.white : Colors.orange,
+                color: wishlist ? Colors.white : Colors.black,
               ),
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      wishlist ? 'Saved' : 'Wishlist',
+                      wishlist ? 'Saved' : 'Add to Wishlist',
                       overflow: TextOverflow.fade,
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 15,
                         fontWeight: FontWeight.w600,
-                        color: wishlist ? Colors.white : Colors.orange,
+                        color: wishlist ? Colors.white : Colors.black,
                       ),
                     ),
                   ],

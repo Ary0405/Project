@@ -6,7 +6,6 @@ import 'package:swapsta/providers/swap_history_provider.dart';
 import 'package:swapsta/widgets/recieved_swap_list.dart';
 import 'package:swapsta/widgets/sent_swap_list.dart';
 import 'package:swapsta/widgets/swap_history_list.dart';
-import 'dart:math' as math;
 import '../widgets/swapscreen_header.dart';
 
 class SwapScreen extends StatefulWidget {
@@ -31,27 +30,15 @@ class _SwapScreenState extends State<SwapScreen> with TickerProviderStateMixin {
     TabController _tabController = TabController(length: 3, vsync: this);
     List<Map<String, dynamic>> tabsData = [
       {
-        "child": Transform.rotate(
-          angle: -math.pi / 5,
-          child: const Icon(
-            Icons.send,
-            size: 28,
-          ),
-        ),
+        "child": null,
         "text": "Sent",
       },
       {
-        "child": const Icon(
-          Icons.inbox,
-          size: 32,
-        ),
+        "child": null,
         "text": "Recieved",
       },
       {
-        "child": const Icon(
-          Icons.history,
-          size: 32,
-        ),
+        "child": null,
         "text": "History",
       },
     ];
@@ -68,28 +55,35 @@ class _SwapScreenState extends State<SwapScreen> with TickerProviderStateMixin {
         ),
       ],
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SwapscreenHeader(
             handleSearch: _onSearchQueryChanged,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.05),
+          Container(
+            decoration: BoxDecoration(
+              color: Color(0xFFF4F6FB),
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(40.0),
+                bottomRight: Radius.circular(40.0),
+                topLeft: Radius.circular(40.0),
+                bottomLeft: Radius.circular(40.0),
+              ),
+            ),
             child: TabBar(
               overlayColor: MaterialStateProperty.all(Colors.transparent),
               splashFactory: NoSplash.splashFactory,
-              labelColor: Colors.orange,
+              labelColor: Colors.black,
               unselectedLabelColor: const Color.fromRGBO(158, 158, 158, .35),
               indicator: const CustomTabIndicator(),
               indicatorPadding: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(context).size.height * 0.035,
+                vertical: MediaQuery.of(context).size.height * 0.015,
               ),
               tabs: tabsData
                   .map(
-                    (tabData) => _buildIcons(
-                        context: context,
-                        child: tabData["child"],
-                        text: tabData["text"]),
+                    (tabData) =>
+                        _buildTab(context: context, text: tabData["text"]),
                   )
                   .toList(),
               controller: _tabController,
@@ -111,7 +105,8 @@ class _SwapScreenState extends State<SwapScreen> with TickerProviderStateMixin {
                 SingleChildScrollView(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: recievedswapslist(searchQuery: searchQuery, tabSwitcher: _tabController),
+                    child: recievedswapslist(
+                        searchQuery: searchQuery, tabSwitcher: _tabController),
                   ),
                 ),
                 SingleChildScrollView(
@@ -131,28 +126,19 @@ class _SwapScreenState extends State<SwapScreen> with TickerProviderStateMixin {
   }
 }
 
-Widget _buildIcons({
+Widget _buildTab({
   required BuildContext context,
-  required Widget child,
   required String text,
 }) {
-  return SizedBox(
+  return Container(
     height: MediaQuery.of(context).size.height * 0.09,
     child: Tab(
-      
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          child,
-          Text(
-            text,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
+        ),
       ),
     ),
   );
@@ -168,7 +154,7 @@ class CustomTabIndicator extends Decoration {
   const CustomTabIndicator({
     this.radius = 8,
     this.indicatorHeight = 4,
-    this.color = Colors.orange,
+    this.color = Colors.transparent,
   });
 
   @override
