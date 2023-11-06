@@ -103,7 +103,7 @@ class _SwapDialog extends State<SwapDialog> {
             highlightColor: const Color(0x00ffffff),
             child: Icon(
               Icons.close,
-              color: Color.fromRGBO(255, 152, 0, 1),
+              color: Colors.black,
             ),
             onTap: () => Navigator.pop(context),
           ),
@@ -159,11 +159,14 @@ class _SwapDialog extends State<SwapDialog> {
                     alignment: Alignment.bottomCenter,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 10),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20))),
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
                       child: const Text(
                         'Choose Item',
                         style: TextStyle(

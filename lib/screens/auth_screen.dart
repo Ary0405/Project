@@ -142,37 +142,36 @@ class _AuthScreenState extends State<AuthScreen> {
                               child: InkWell(
                                 onTap: () async {
                                   try {
-                                    showDialog(
-                                      context: context,
-                                      barrierDismissible:
-                                          false, // Prevent dismissing the dialog by tapping outside
-                                      builder: (context) {
-                                        return AlertDialog(
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              CircularProgressIndicator(), // Show the circular progress indicator
-                                              SizedBox(height: 16),
-                                              Text(
-                                                "Logging In...",
-                                              ), // Optional: Add a message
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    );
+                                    // showDialog(
+                                    //   context: context,
+                                    //   barrierDismissible:
+                                    //       false, // Prevent dismissing the dialog by tapping outside
+                                    //   builder: (context) {
+                                    //     return AlertDialog(
+                                    //       content: Column(
+                                    //         mainAxisSize: MainAxisSize.min,
+                                    //         children: [
+                                    //           CircularProgressIndicator(), // Show the circular progress indicator
+                                    //           SizedBox(height: 16),
+                                    //           Text(
+                                    //             "Logging In...",
+                                    //           ), // Optional: Add a message
+                                    //         ],
+                                    //       ),
+                                    //     );
+                                    //   },
+                                    // );
                                     final provider =
                                         Provider.of<GoogleSignInProvider>(
                                       context,
                                       listen: false,
                                     );
+                                    // Navigator.pop(context);
                                     await provider.GoogleLogin();
-                                    Navigator.pop(context);
                                   } catch (e) {
                                     print(e);
-                                    Navigator.pop(context);
                                   }
-                                  Navigator.pop(context);
+                                    // Navigator.pop(context);
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
