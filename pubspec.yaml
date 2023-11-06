@@ -84,6 +84,7 @@ flutter:
     - assets/img/login_screen.png
     - assets/img/google_icon.png
     - assets/images/
+    - assets/img/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

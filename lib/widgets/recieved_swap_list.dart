@@ -100,282 +100,298 @@ class _recievedswapslistState extends State<recievedswapslist> {
           itemCount: keywordIncludedSwaps.length,
           controller: scrollController,
           itemBuilder: (ctx, i) {
-            return Wrap(children: [
-              Stack(
-                children: [
-                  Card(
-                    clipBehavior: Clip.antiAlias,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                    ),
-                    shadowColor: Colors.transparent,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: Column(
-                        children: [
-                          SwapSwappableRow(swap: keywordIncludedSwaps[i]),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                  color: Colors
-                                      .red, // Set the background color to red
-                                ),
-                                padding:
-                                    EdgeInsets.fromLTRB(0.0, 0, 15.0, 0.0),
-                                child: Row(
-                                  children: [
-                                    IconButton(
-                                        splashRadius: 24,
-                                        onPressed: () async {
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: const Text(
-                                                      'Are you Sure?'),
-                                                  content: Text(
-                                                    'Are you sure you want to reject swap request from ${keywordIncludedSwaps[i].ownerName}',
-                                                  ),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () async {
-                                                        try {
-                                                          showDialog(
-                                                            context: context,
-                                                            barrierDismissible:
-                                                                false, // Prevent dismissing the dialog by tapping outside
-                                                            builder: (context) {
-                                                              return AlertDialog(
-                                                                content: Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .min,
-                                                                  children: [
-                                                                    CircularProgressIndicator(), // Show the circular progress indicator
-                                                                    SizedBox(
-                                                                      height:
-                                                                          16,
-                                                                    ),
-                                                                    Text(
-                                                                      "Please wait...",
-                                                                    ), // Optional: Add a message
-                                                                  ],
-                                                                ),
-                                                              );
-                                                            },
-                                                          );
-                                                          await rejectSwap(
-                                                            keywordIncludedSwaps[
-                                                                    i]
-                                                                .id,
-                                                            keywordIncludedSwaps[
-                                                                i],
-                                                          );
-                                                          final swappableProvider =
-                                                              Provider.of<
-                                                                  SwappableProvider>(
+            return Wrap(
+              children: [
+                Stack(
+                  children: [
+                    Card(
+                      clipBehavior: Clip.antiAlias,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      shadowColor: Colors.transparent,
+                      child: Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Column(
+                          children: [
+                            SwapSwappableRow(swap: keywordIncludedSwaps[i]),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                      color: Colors
+                                          .red, // Set the background color to red
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        IconButton(
+                                          splashRadius: 24,
+                                          onPressed: () async {
+                                            showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                      'Are you Sure?',
+                                                    ),
+                                                    content: Text(
+                                                      'Are you sure you want to reject swap request from ${keywordIncludedSwaps[i].ownerName}',
+                                                    ),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () async {
+                                                          try {
+                                                            showDialog(
+                                                              context: context,
+                                                              barrierDismissible:
+                                                                  false, // Prevent dismissing the dialog by tapping outside
+                                                              builder:
+                                                                  (context) {
+                                                                return AlertDialog(
+                                                                  content:
+                                                                      Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .min,
+                                                                    children: [
+                                                                      CircularProgressIndicator(), // Show the circular progress indicator
+                                                                      SizedBox(
+                                                                        height:
+                                                                            16,
+                                                                      ),
+                                                                      Text(
+                                                                        "Please wait...",
+                                                                      ), // Optional: Add a message
+                                                                    ],
+                                                                  ),
+                                                                );
+                                                              },
+                                                            );
+                                                            await rejectSwap(
+                                                              keywordIncludedSwaps[
+                                                                      i]
+                                                                  .id,
+                                                              keywordIncludedSwaps[
+                                                                  i],
+                                                            );
+                                                            final swappableProvider =
+                                                                Provider.of<
+                                                                    SwappableProvider>(
+                                                              context,
+                                                              listen: false,
+                                                            );
+                                                            await swappableProvider
+                                                                .fetchSwappables();
+                                                            await swappableProvider
+                                                                .fetchSwaps();
+                                                          } on Exception catch (e) {
+                                                            print(e);
+                                                            Navigator.pop(
+                                                                context);
+                                                          }
+                                                          Navigator.pop(
                                                             context,
-                                                            listen: false,
                                                           );
-                                                          await swappableProvider
-                                                              .fetchSwappables();
-                                                          await swappableProvider
-                                                              .fetchSwaps();
-                                                        } on Exception catch (e) {
-                                                          print(e);
+                                                          Navigator.pushNamed(
+                                                            context,
+                                                            '/home',
+                                                          );
+                                                        },
+                                                        child: const Text(
+                                                          'OK',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  );
+                                                });
+                                          },
+                                          icon: const Icon(Icons.close,
+                                              color: Colors.white, size: 20),
+                                          splashColor: Colors.red[400],
+                                          highlightColor: Colors.transparent,
+                                        ),
+                                        // Text(
+                                        //   'Deny',
+                                        //   style: TextStyle(
+                                        //     fontSize: 15,
+                                        //     color: Colors.white,
+                                        //     fontWeight: FontWeight
+                                        //         .w500, // Font color for the tab text
+                                        //   ),
+                                        // )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                      color: Colors
+                                          .black, // Set the background color to red
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: const Icon(Icons.contacts,
+                                              color: Colors.white, size: 20),
+                                          splashRadius: 24,
+                                          splashColor: Colors.orange[400],
+                                          highlightColor: Colors.transparent,
+                                        ),
+                                        // Text(
+                                        //   'Contact',
+                                        //   style: TextStyle(
+                                        //       fontSize: 15,
+                                        //       color: Colors.white,
+                                        //       fontWeight: FontWeight
+                                        //           .w500 // Font color for the tab text
+                                        //       ),
+                                        // )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(25.0),
+                                      color: Colors
+                                          .green, // Set the background color to red
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {
+                                            showDialog(
+                                                context: context,
+                                                builder: (BuildContext ctx) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                        'Are you Sure?'),
+                                                    content: Text(
+                                                        'Are you sure you want to accept swap request from ${keywordIncludedSwaps[i].requesterName}'),
+                                                    actions: [
+                                                      TextButton(
+                                                        child: const Text('OK'),
+                                                        onPressed: () async {
+                                                          try {
+                                                            showDialog(
+                                                              context: context,
+                                                              barrierDismissible:
+                                                                  false, // Prevent dismissing the dialog by tapping outside
+                                                              builder:
+                                                                  (context) {
+                                                                return AlertDialog(
+                                                                  content:
+                                                                      Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .min,
+                                                                    children: [
+                                                                      CircularProgressIndicator(), // Show the circular progress indicator
+                                                                      SizedBox(
+                                                                        height:
+                                                                            16,
+                                                                      ),
+                                                                      Text(
+                                                                        "Please wait...",
+                                                                      ), // Optional: Add a message
+                                                                    ],
+                                                                  ),
+                                                                );
+                                                              },
+                                                            );
+                                                            await updateSwapData(
+                                                              keywordIncludedSwaps[
+                                                                      i]
+                                                                  .id,
+                                                              keywordIncludedSwaps[
+                                                                  i],
+                                                            );
+                                                            final swappableProvider =
+                                                                Provider.of<
+                                                                    SwappableProvider>(
+                                                              context,
+                                                              listen: false,
+                                                            );
+                                                            await swappableProvider
+                                                                .fetchSwappables();
+                                                            await swappableProvider
+                                                                .fetchSwaps();
+                                                          } on Exception catch (e) {
+                                                            print(e);
+                                                            Navigator.pop(
+                                                                context);
+                                                          }
                                                           Navigator.pop(
                                                               context);
-                                                        }
-                                                        Navigator.pop(context);
-                                                        Navigator.pushNamed(
-                                                          context,
-                                                          '/home',
-                                                        );
-                                                      },
-                                                      child: const Text('OK'),
-                                                    )
-                                                  ],
-                                                );
-                                              });
-                                        },
-                                        icon: const Icon(
-                                          Icons.close,
-                                          color: Colors.white,
-                                          size:20
-                                        ),
-                                        splashColor: Colors.red[400],
-                                        highlightColor: Colors.transparent),
-                                    Text(
-                                      'Deny',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight
-                                              .w500 // Font color for the tab text
-                                          ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                  color: Colors
-                                      .black, // Set the background color to red
-                                ),
-                                padding:
-                                    EdgeInsets.fromLTRB(0.0, 0, 15.0, 0.0),
-                                child: Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                        Icons.contacts,
-                                        color: Colors.white,
-                                        size:20
-                                      ),
-                                      splashRadius: 24,
-                                      splashColor: Colors.orange[400],
-                                      highlightColor: Colors.transparent,
-                                    ),
-                                    Text(
-                                      'Contact',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight
-                                              .w500 // Font color for the tab text
-                                          ),
-                                    )
-                                  ],
-
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(25.0),
-                                  color: Colors
-                                      .green, // Set the background color to red
-                                ),
-                                padding:
-                                    EdgeInsets.fromLTRB(10.0, 0, 10.0, 2.0),
-                                child: Row(
-                                  children: [
-                                    IconButton(
-                                        onPressed: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext ctx) {
-                                                return AlertDialog(
-                                                  title:
-                                                      const Text('Are you Sure?'),
-                                                  content: Text(
-                                                      'Are you sure you want to accept swap request from ${keywordIncludedSwaps[i].requesterName}'),
-                                                  actions: [
-                                                    TextButton(
-                                                      child: const Text('OK'),
-                                                      onPressed: () async {
-                                                        try {
-                                                          showDialog(
-                                                            context: context,
-                                                            barrierDismissible:
-                                                                false, // Prevent dismissing the dialog by tapping outside
-                                                            builder: (context) {
-                                                              return AlertDialog(
-                                                                content: Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .min,
-                                                                  children: [
-                                                                    CircularProgressIndicator(), // Show the circular progress indicator
-                                                                    SizedBox(
-                                                                      height: 16,
-                                                                    ),
-                                                                    Text(
-                                                                      "Please wait...",
-                                                                    ), // Optional: Add a message
-                                                                  ],
-                                                                ),
-                                                              );
-                                                            },
-                                                          );
-                                                          await updateSwapData(
-                                                            keywordIncludedSwaps[i]
-                                                                .id,
-                                                            keywordIncludedSwaps[i],
-                                                          );
-                                                          final swappableProvider =
-                                                              Provider.of<
-                                                                  SwappableProvider>(
+                                                          Navigator.pushNamed(
                                                             context,
-                                                            listen: false,
+                                                            '/home',
                                                           );
-                                                          await swappableProvider
-                                                              .fetchSwappables();
-                                                          await swappableProvider
-                                                              .fetchSwaps();
-                                                        } on Exception catch (e) {
-                                                          print(e);
-                                                          Navigator.pop(context);
-                                                        }
-                                                        Navigator.pop(context);
-                                                        Navigator.pushNamed(
-                                                          context,
-                                                          '/home',
-                                                        );
-                                                        // Navigator.of(ctx).pop();
-                                                        // widget.tabSwitcher
-                                                        //     .animateTo(2);
-                                                      },
-                                                    ),
-                                                  ],
-                                                );
-                                              });
-                                        },
-                                        icon: const Icon(
-                                          Icons.check,
-                                          color: Colors.white,
-                                          size:20
+                                                          // Navigator.of(ctx).pop();
+                                                          // widget.tabSwitcher
+                                                          //     .animateTo(2);
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                });
+                                          },
+                                          icon: const Icon(Icons.check,
+                                              color: Colors.white, size: 20),
+                                          splashRadius: 24,
+                                          splashColor: Colors.green[400],
+                                          highlightColor: Colors.transparent,
                                         ),
-                                        splashRadius: 24,
-                                        splashColor: Colors.green[400],
-                                        highlightColor: Colors.transparent),
-                                    Text(
-                                      'Accept',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight
-                                              .w500 // Font color for the tab text
-                                          ),
-                                    )
-                                  ],
+                                        // Text(
+                                        //   'Accept',
+                                        //   style: TextStyle(
+                                        //       fontSize: 15,
+                                        //       color: Colors.white,
+                                        //       fontWeight: FontWeight
+                                        //           .w500 // Font color for the tab text
+                                        //       ),
+                                        // )
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          )
-                        ],
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(
-                        MediaQuery.of(context).size.width * .41,
-                        MediaQuery.of(context).size.height * .24,
+                    Container(
+                      margin: EdgeInsets.fromLTRB(
+                        MediaQuery.of(context).size.width * .37,
+                        MediaQuery.of(context).size.height * .12,
                         0,
-                        0),
-                    child: Image.asset(
-                      'assets/img/swap_arrow.png',
-                      height: 35,
-                    ),
-                  )
-                ],
-              ),
-            ]);
+                        0,
+                      ),
+                      child: Image.asset(
+                        'assets/img/swap_arrow_new.png',
+                        height: 80,
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            );
           },
         );
       },
