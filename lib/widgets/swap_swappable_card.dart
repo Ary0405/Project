@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../models/swappable.dart';
 import '../screens/swappable_screen.dart';
-import 'condition.dart';
 
 class SwapSwappableCard extends StatelessWidget {
   const SwapSwappableCard({
@@ -15,15 +14,9 @@ class SwapSwappableCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final authUser = FirebaseAuth.instance.currentUser!;
     return SizedBox(
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        color: const Color(0xFFF9F6F2),
+      child: Container(
+        color: Colors.white,
         child: InkWell(
-          splashColor: const Color.fromRGBO(255, 152, 0, 0.2),
-          highlightColor: const Color(0x00ffffff),
           onTap: () {
             Navigator.of(context)
                 .pushNamed(SwappableScreen.routeName, arguments: swappable);
@@ -41,19 +34,15 @@ class SwapSwappableCard extends StatelessWidget {
                             image: NetworkImage(swappable.imageUrls[0]),
                             fit: BoxFit.cover,
                           ),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10)
+                          )
                         ),
                         height: MediaQuery.of(context).size.height * .18,
                       ),
                     ),
                   ),
-                  Positioned(
-                    bottom: 10,
-                    right: 10,
-                    child: Material(
-                        borderRadius: BorderRadius.circular(24),
-                        color: Colors.transparent,
-                        child: ConditionStars(swappable.condition)),
-                  )
                 ],
               ),
               Container(

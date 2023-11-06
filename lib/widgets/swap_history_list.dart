@@ -80,8 +80,13 @@ class _swaphistorylistState extends State<swaphistorylist> {
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 8),
                             child: Text(
-                              'Completed Swap on ' +  formatDate(keywordIncludedSwaps[i].createdAt.toString()),
-                              style: TextStyle(color: Colors.orange),
+                              'Completed Swap on ' +
+                                  formatDate(keywordIncludedSwaps[i]
+                                      .createdAt
+                                      .toString()),
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
                             ),
                           )
                         ],
@@ -90,13 +95,14 @@ class _swaphistorylistState extends State<swaphistorylist> {
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(
-                        MediaQuery.of(context).size.width * .41,
-                        MediaQuery.of(context).size.height * .24,
-                        0,
-                        0),
+                      MediaQuery.of(context).size.width * .36,
+                      MediaQuery.of(context).size.height * .09,
+                      0,
+                      0,
+                    ),
                     child: Image.asset(
-                      'assets/img/done.png',
-                      height: 35,
+                      'assets/img/done_arrow.png',
+                      height: 70,
                     ),
                   )
                 ],

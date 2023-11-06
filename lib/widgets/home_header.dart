@@ -15,19 +15,23 @@ class HomeHeader extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Hello ${authUser.displayName?.split(" ")[0]}, 🖐️',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w400,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(6, 10, 8, 8),
+                child: Text(
+                  'Hello ${authUser.displayName?.split(" ")[0]}, 🖐️',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
               const SizedBox(height: 5),
               const Text(
                 'Welcome back!',
                 style: TextStyle(
+                  fontFamily: 'Inter',
                   fontSize: 32,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600
                 ),
               ),
             ],

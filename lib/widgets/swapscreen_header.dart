@@ -8,12 +8,12 @@ class SwapscreenHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(left: 50, right: 20, top: 40),
+      margin: const EdgeInsets.only(left: 30, right: 20, top: 40),
       child: const Text(
         'Swaps',
         style: TextStyle(
           fontSize: 26,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w700,
         ),
       ),
     );
