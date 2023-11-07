@@ -16,7 +16,7 @@ class SortButton extends StatelessWidget {
     return IconButton(
       icon: const Icon(
         Icons.sort_rounded,
-        color: Colors.orange,
+        color: Colors.black,
       ),
       onPressed: () => showSortModal(
         context,

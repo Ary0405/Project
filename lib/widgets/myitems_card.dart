@@ -53,9 +53,9 @@ class MyItemsCard extends StatelessWidget {
                     width: 40,
                     child: Material(
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.orange.withAlpha(70),
+                      color: Colors.black.withAlpha(70),
                       child: IconButton(
-                        splashColor: Colors.orange.withAlpha(50),
+                        splashColor: Colors.black.withAlpha(50),
                         highlightColor: Colors.transparent,
                         splashRadius: 24,
                         icon: Icon(
@@ -64,13 +64,14 @@ class MyItemsCard extends StatelessWidget {
                           color: Colors.white,
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(context, '/edit-item', arguments: {
-                            'title': swappable.name,
-                            'description': swappable.description,
-                            'header': 'Edit Item',
-                            'condition': swappable.condition,
-                            'images' : swappable.imageUrls,
-                          });
+                          Navigator.pushNamed(context, '/edit-item',
+                              arguments: {
+                                'title': swappable.name,
+                                'description': swappable.description,
+                                'header': 'Edit Item',
+                                'condition': swappable.condition,
+                                'images': swappable.imageUrls,
+                              });
                         },
                       ),
                     ),

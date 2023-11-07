@@ -155,7 +155,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.orange),
+                            borderSide: BorderSide(color: Colors.black),
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           filled: true,
@@ -203,7 +203,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                           borderSide: BorderSide.none,
                         ),
                         focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.orange),
+                          borderSide: BorderSide(color: Colors.black),
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         )),
                   ),
@@ -215,9 +215,9 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   border: Border.all(
-                    color: Colors.orange,
+                    color: Colors.black,
                   ),
-                  color: Colors.orange,
+                  color: Colors.black,
                 ),
                 child: InkWell(
                   splashColor: const Color.fromRGBO(

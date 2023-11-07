@@ -82,7 +82,7 @@ Widget _buildListItem(
   return Row(
     mainAxisSize: MainAxisSize.max,
     children: [
-      Icon(icon, color: Colors.orange),
+      Icon(icon, color: Colors.black),
       Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 16.0,

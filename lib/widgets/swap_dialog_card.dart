@@ -28,7 +28,7 @@ class SelectItemCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
-            color: selected ? Colors.orange : Colors.transparent,
+            color: selected ? Colors.black : Colors.transparent,
             width: selected ? 2 : 0,
           ),
         ),

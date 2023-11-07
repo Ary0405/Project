@@ -19,7 +19,7 @@ class _ImageScreenState extends State<ImageScreen> {
           width: double.infinity,
           height: MediaQuery.of(context).size.height * .9,
           initialPage: 0,
-          indicatorColor: Colors.orange,
+          indicatorColor: Colors.black,
           isLoop: widget.url.length > 1,
           autoPlayInterval: 4000,
           children: widget.url

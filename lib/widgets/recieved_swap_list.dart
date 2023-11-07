@@ -247,18 +247,9 @@ class _recievedswapslistState extends State<recievedswapslist> {
                                           icon: const Icon(Icons.contacts,
                                               color: Colors.white, size: 20),
                                           splashRadius: 24,
-                                          splashColor: Colors.orange[400],
+                                          splashColor: Colors.black,
                                           highlightColor: Colors.transparent,
                                         ),
-                                        // Text(
-                                        //   'Contact',
-                                        //   style: TextStyle(
-                                        //       fontSize: 15,
-                                        //       color: Colors.white,
-                                        //       fontWeight: FontWeight
-                                        //           .w500 // Font color for the tab text
-                                        //       ),
-                                        // )
                                       ],
                                     ),
                                   ),

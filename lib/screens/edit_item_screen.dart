@@ -193,7 +193,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                           borderSide: BorderSide.none,
                         ),
                         focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.orange),
+                          borderSide: BorderSide(color: Colors.black),
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                       ),
@@ -224,14 +224,14 @@ class _EditItemScreenState extends State<EditItemScreen> {
                           Container(
                             padding: const EdgeInsets.all(40),
                             decoration: const BoxDecoration(
-                              color: Color(0XFFFFDDC3),
+                              color: Color.fromARGB(245, 249, 249, 249),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
                             ),
                             child: ElevatedButton(
                               child: const Icon(
                                 Icons.add_rounded,
-                                color: Colors.orange,
+                                color: Colors.black,
                               ),
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.white,
@@ -269,7 +269,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                                                         Icon(
                                                           Icons
                                                               .camera_alt_outlined,
-                                                          color: Colors.orange,
+                                                          color: Colors.black,
                                                         ),
                                                         Padding(
                                                           padding:
@@ -297,7 +297,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                                                       children: [
                                                         Icon(
                                                           Icons.image_outlined,
-                                                          color: Colors.orange,
+                                                          color: Colors.black,
                                                         ),
                                                         Padding(
                                                           padding:
@@ -373,7 +373,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                           borderSide: BorderSide.none,
                         ),
                         focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.orange),
+                          borderSide: BorderSide(color: Colors.black),
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         )),
                   ),
@@ -411,7 +411,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                                   BorderRadius.all(Radius.circular(10)),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.orange),
+                              borderSide: BorderSide(color: Colors.black),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
                             ),
@@ -420,7 +420,7 @@ class _EditItemScreenState extends State<EditItemScreen> {
                           ),
                           icon: const Icon(
                             Icons.arrow_drop_down_rounded,
-                            color: Colors.orange,
+                            color: Colors.black,
                           ),
                           items: dropdownItems.map((e) {
                             return DropdownMenuItem<String>(
@@ -484,9 +484,9 @@ class _EditItemScreenState extends State<EditItemScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   border: Border.all(
-                    color: Colors.orange,
+                    color: Colors.black,
                   ),
-                  color: Colors.orange,
+                  color: Colors.black,
                 ),
                 child: InkWell(
                   splashColor: const Color.fromRGBO(

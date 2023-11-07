@@ -48,6 +48,7 @@ dependencies:
   image_picker: ^1.0.2
   firebase_storage: ^11.2.6
   uuid: ^3.0.7
+  liquid_pull_to_refresh: ^3.0.1
 
 dev_dependencies:
   flutter_test:
