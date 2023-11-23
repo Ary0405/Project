@@ -82,12 +82,14 @@ class SwappableCard extends StatelessWidget {
                               var data =
                                   await wishRef.doc(authUser.email).get();
                               if (!data.exists) {
+                                print("yoyo");
                                 items.add(wish);
                                 var data = {
                                   "items": items,
                                 };
                                 wishRef.doc(authUser.email).set(data);
                               } else {
+                                print("yo333yo");
                                 // print(data.data()?['items']);
                                 bool exists = data.data()?['items'].any(
                                       (obj) => obj['id'] == swappable.id,
@@ -110,9 +112,23 @@ class SwappableCard extends StatelessWidget {
                               }
                               user.toggleWishlist(swappable.id);
                             },
-                            icon: user.wishlist.containsKey(swappable.id)
-                                ? const Icon(Icons.favorite)
-                                : const Icon(Icons.favorite_border),
+                            icon: FutureBuilder(
+                              future: user.itemExists(swappable.id),
+                              builder: (context, snapshot) {
+                                print(snapshot.connectionState);
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const CircularProgressIndicator();
+                                } else {
+                                  return Icon(
+                                    (snapshot.data == true)
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    color: Colors.white,
+                                  );
+                                }
+                              },
+                            ),
                             color: Colors.white,
                             splashColor: const Color.fromRGBO(255, 152, 0, 0.2),
                           )
