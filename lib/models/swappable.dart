@@ -111,7 +111,6 @@ class SwappableProvider extends ChangeNotifier {
             requesterId: data['requesterId'],
             requesterName: data['requesterName'],
             requesterImage: data['requesterImage'],
-            // requesterPhone: data['requesterPhone'],
             ownerId: data['ownerId'],
             ownerName: data['ownerName'],
             ownerImage: data['ownerImage'],
@@ -125,7 +124,6 @@ class SwappableProvider extends ChangeNotifier {
             requesterItemUpdatedAt:
                 DateTime.parse(data['requesterItemUpdatedAt']),
             requesterItemCondition: data['requesterItemCondition'].toDouble(),
-            // requesterItemCategoryEmoji: entry['requesterItemCategoryEmoji'],
             ownerItemId: data['ownerItemId'],
             ownerItemName: data['ownerItemName'],
             ownerItemImages: List<String>.from(data['ownerItemImages']),
@@ -134,7 +132,6 @@ class SwappableProvider extends ChangeNotifier {
             ownerItemCreatedAt: DateTime.parse(data['ownerItemCreatedAt']),
             ownerItemUpdatedAt: DateTime.parse(data['ownerItemUpdatedAt']),
             ownerItemCondition: data['ownerItemCondition'].toDouble(),
-            // ownerItemCategoryEmoji: entry['ownerItemCategoryEmoji'],
             isAccepted: data['status'] == 'requested' ? false : true,
           );
         } else {

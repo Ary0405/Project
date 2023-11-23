@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:provider/provider.dart';
@@ -17,7 +18,6 @@ class SwappableScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final user = Provider.of<Auth>(context);
     final authUser = FirebaseAuth.instance.currentUser!;
     final routeArgs = ModalRoute.of(context)?.settings.arguments;
@@ -101,7 +101,7 @@ class SwappableScreen extends StatelessWidget {
                     children: [
                       //ownername
                       Text(
-                        (swappable.ownerId == authUser.email)  //you box
+                        (swappable.ownerId == authUser.email) //you box
                             ? "You"
                             : swappable.ownerName,
                         textAlign: TextAlign.left,
@@ -109,7 +109,7 @@ class SwappableScreen extends StatelessWidget {
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
-                      ),                   
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -117,7 +117,8 @@ class SwappableScreen extends StatelessWidget {
                   ),
                   SizedBox(
                     // width: double.infinity,
-                    child: Text(              //mitumitu box
+                    child: Text(
+                      //mitumitu box
                       swappable.name,
                       textAlign: TextAlign.left,
                       style: const TextStyle(
@@ -127,24 +128,21 @@ class SwappableScreen extends StatelessWidget {
                     ),
                   ),
 
-                   SizedBox(
+                  SizedBox(
                     width: double.infinity,
-                    child: Text(              //mitumitu box
+                    child: Text(
+                      //mitumitu box
                       'Description',
                       textAlign: TextAlign.left,
                       style: const TextStyle(
-                        fontSize: 14.8,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black
-                      ),
+                          fontSize: 14.8,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black),
                     ),
                   ),
 
-
-
                   //description
                   SizedBox(
-
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height * 0.15,
                     child: SingleChildScrollView(
@@ -171,15 +169,12 @@ class SwappableScreen extends StatelessWidget {
                           fontSize: 14.8,
                           fontWeight: FontWeight.w700,
                           color: Colors.black,
-                          
                         ),
-                        
                       ),
-                      
                       ConditionStars(swappable.condition)
                     ],
                   ),
-                  
+
                   //buttons
                   Container(
                       child: (swappable.ownerId != authUser.email)
@@ -190,12 +185,65 @@ class SwappableScreen extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   buildSwappableButton(
+                                    swappable: swappable,
                                     context: context,
                                     wishlist: (user.wishlist
                                             .containsKey(swappable.id))
                                         ? true
                                         : false,
-                                    onPressed: () {
+                                    onPressed: () async {
+                                      var wishRef = FirebaseFirestore.instance
+                                          .collection('wishlist');
+                                      var items = [];
+                                      var wish = {
+                                        "id": swappable.id,
+                                        "name": swappable.name,
+                                        "imageUrls": swappable.imageUrls,
+                                        "description": swappable.description,
+                                        "category": swappable.category,
+                                        "ownerName": swappable.ownerName,
+                                        "ownerId": swappable.ownerId,
+                                        "ownerImageUrl":
+                                            swappable.ownerImageUrl,
+                                        "condition": swappable.condition,
+                                        "createdAt": swappable.createdAt,
+                                        "updatedAt": swappable.updatedAt,
+                                        "swapRequests": swappable.swapRequests,
+                                        "swapped": swappable.swapped,
+                                      };
+                                      var data = await wishRef
+                                          .doc(authUser.email)
+                                          .get();
+                                      if (!data.exists) {
+                                        print("yoyo");
+                                        items.add(wish);
+                                        var data = {
+                                          "items": items,
+                                        };
+                                        wishRef.doc(authUser.email).set(data);
+                                      } else {
+                                        print("yo333yo");
+                                        // print(data.data()?['items']);
+                                        bool exists = data.data()?['items'].any(
+                                              (obj) =>
+                                                  obj['id'] == swappable.id,
+                                            );
+
+                                        items = data.data()?['items'];
+                                        if (exists) {
+                                          items.removeWhere(
+                                            (obj) => obj['id'] == swappable.id,
+                                          );
+                                          wishRef.doc(authUser.email).update(
+                                            {"items": items},
+                                          );
+                                        } else {
+                                          items.add(wish);
+                                          wishRef.doc(authUser.email).update(
+                                            {"items": items},
+                                          );
+                                        }
+                                      }
                                       user.toggleWishlist(swappable.id);
                                     },
                                   ),
@@ -299,7 +347,9 @@ Widget buildSwappableButton({
   required BuildContext context,
   required bool wishlist,
   required Function onPressed,
+  required Swappable swappable,
 }) {
+  final user = Provider.of<Auth>(context);
   return Material(
     color: Colors.transparent,
     child: Ink(
@@ -325,23 +375,41 @@ Widget buildSwappableButton({
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(
-                wishlist ? Icons.favorite : Icons.favorite_border,
-                color: wishlist ? Colors.white : Colors.black,
+              FutureBuilder(
+                future: user.itemExists(swappable.id),
+                builder: (context, snapshot) {
+                  return Icon(
+                    (snapshot.data == true)
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: wishlist ? Colors.white : Colors.black,
+                  );
+                },
               ),
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      wishlist ? 'Saved' : 'Add to Wishlist',
-                      overflow: TextOverflow.fade,
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: wishlist ? Colors.white : Colors.black,
-                      ),
-                    ),
+                    FutureBuilder(
+                        future: user.itemExists(swappable.id),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const CircularProgressIndicator();
+                          } else {
+                            return Text(
+                              (snapshot.data == true)
+                                  ? 'Saved'
+                                  : 'Add to Wishlist',
+                              overflow: TextOverflow.fade,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: wishlist ? Colors.white : Colors.black,
+                              ),
+                            );
+                          }
+                        }),
                   ],
                 ),
               ),

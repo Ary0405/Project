@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -11,7 +12,6 @@ class FeedbackScreen extends StatefulWidget {
 }
 
 class _FeedbackScreenState extends State<FeedbackScreen> {
-  
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
       DropdownMenuItem(
@@ -37,7 +37,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
 
   String selectedValue = "1";
   double rating = 0;
-  
+
   final TextEditingController _descriptionController = TextEditingController();
   void onValueChange() {
     setState(() {
@@ -191,7 +191,8 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                     controller: _descriptionController,
                     textAlign: TextAlign.start,
                     decoration: InputDecoration(
-                        counterText: "${_descriptionController.text.length} / 200",
+                        counterText:
+                            "${_descriptionController.text.length} / 200",
                         // contentPadding: const EdgeInsets.only(
                         // top: -50, bottom: 60, right: 10, left: 10),
                         labelText: 'Description',
@@ -228,7 +229,17 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                   ),
                   borderRadius: BorderRadius.circular(30),
                   highlightColor: Colors.transparent,
-                  onTap: () {},
+                  onTap: () async {
+                    var feedbackRef =
+                        FirebaseFirestore.instance.collection('feedback');
+                    var data = {
+                      "rating": rating,
+                      "issue": selectedValue,
+                      "description": _descriptionController.text,
+                    };
+                    await feedbackRef.add(data);
+                    Navigator.of(context).pop();
+                  },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 10,

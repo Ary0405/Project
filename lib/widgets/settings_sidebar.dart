@@ -53,20 +53,6 @@ class _SettingsDrawerState extends State<SettingsDrawer>
                 ],
               ),
             ),
-            const ListTile(
-              title: Text('About'),
-              leading: Icon(
-                Icons.info_outline_rounded,
-                color: Colors.black,
-              ),
-            ),
-            const ListTile(
-              title: Text('Settings'),
-              leading: Icon(
-                Icons.settings,
-                color: Colors.black,
-              ),
-            ),
             ListTile(
               title: Text('Feedback'),
               leading: Icon(
