@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +60,54 @@ class SwappableCard extends StatelessWidget {
                     child: (swappable.ownerId != authUser.email)
                         ? IconButton(
                             splashRadius: 20,
-                            onPressed: () {
+                            onPressed: () async {
+                              var wishRef = FirebaseFirestore.instance
+                                  .collection('wishlist');
+                              var items = [];
+                              var wish = {
+                                "id": swappable.id,
+                                "name": swappable.name,
+                                "imageUrls": swappable.imageUrls,
+                                "description": swappable.description,
+                                "category": swappable.category,
+                                "ownerName": swappable.ownerName,
+                                "ownerId": swappable.ownerId,
+                                "ownerImageUrl": swappable.ownerImageUrl,
+                                "condition": swappable.condition,
+                                "createdAt": swappable.createdAt,
+                                "updatedAt": swappable.updatedAt,
+                                "swapRequests": swappable.swapRequests,
+                                "swapped": swappable.swapped,
+                              };
+                              var data =
+                                  await wishRef.doc(authUser.email).get();
+                              if (!data.exists) {
+                                items.add(wish);
+                                var data = {
+                                  "items": items,
+                                };
+                                wishRef.doc(authUser.email).set(data);
+                              } else {
+                                // print(data.data()?['items']);
+                                bool exists = data.data()?['items'].any(
+                                      (obj) => obj['id'] == swappable.id,
+                                    );
+
+                                items = data.data()?['items'];
+                                if (exists) {
+                                  items.removeWhere(
+                                    (obj) => obj['id'] == swappable.id,
+                                  );
+                                  wishRef.doc(authUser.email).update(
+                                    {"items": items},
+                                  );
+                                } else {
+                                  items.add(wish);
+                                  wishRef.doc(authUser.email).update(
+                                    {"items": items},
+                                  );
+                                }
+                              }
                               user.toggleWishlist(swappable.id);
                             },
                             icon: user.wishlist.containsKey(swappable.id)
