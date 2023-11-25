@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:swapsta/models/swap.dart';
-import 'package:swapsta/models/swappable.dart';
 import 'package:swapsta/providers/bottom_nav_visibility_provider.dart';
 import 'package:swapsta/widgets/swap_swappable_row.dart';
 

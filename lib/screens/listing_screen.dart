@@ -91,35 +91,6 @@ class _ProfileScreenState extends State<ListingScreen>
   }
 }
 
-Widget _buildIcons({
-  required BuildContext context,
-  required IconData icon,
-  required String text,
-}) {
-  return SizedBox(
-    height: MediaQuery.of(context).size.height * 0.09,
-    child: Tab(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            size: 28,
-          ),
-          Text(
-            text,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
 Widget _buildTab({
   required BuildContext context,
   required String text,
